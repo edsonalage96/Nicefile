@@ -23,7 +23,7 @@ def organizar():
     
     for item in os.listdir(pasta_origem):
         #🔥 Proteção para não mover os ficheiros do próprio script/configuração e Git
-        if item in ['nicefile.py', 'config.json'] or item.startswith('.'):
+        if item in ['nicefile.py', 'config.json', 'README.md'] or item.startswith('.'):
             continue
             
         caminho_item = os.path.join(pasta_origem, item)
