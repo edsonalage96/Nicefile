@@ -1,26 +1,31 @@
 import os
 import shutil
+import json
 
-
-MAPA_EXTENSOES = {
-    'Imagens': ['.jpg', '.jpeg', '.png', '.gif', '.bmp', '.tiff'],
-    'Documentos': ['.pdf', '.docx', '.txt', '.xlsx', '.pptx'],
-    'Audio': ['.mp3', '.wav', '.aac', '.flac'],
-    'Videos': ['.mp4', '.avi', '.mkv', '.mov'],
-    'Arquivos_Compactados': ['.zip', '.rar', '.7z', '.tar.gz'],
-    'Codigo_Fonte': ['.py', '.java', '.cpp', '.js', '.html', '.css'],
-    'Outros': []
-}
+def carregar_configuracao():
+    # Caminho do ficheiro de configuração
+    caminho_config = "config.json"
+    
+    # Se o ficheiro JSON não existir, cria um padrão básico
+    if not os.path.exists(caminho_config):
+        padrao = {"Documentos": [".pdf", ".txt"], "Imagens": [".png", ".jpg"]}
+        with open(caminho_config, "w") as f:
+            json.dump(padrao, f, indent=4)
+        return padrao
+        
+    # Lê as configurações do JSON
+    with open(caminho_config, "r") as f:
+        return json.load(f)
 
 def organizar():
     pasta_origem = os.getcwd()
-
+    MAPA_EXTENSOES = carregar_configuracao()
     
     for item in os.listdir(pasta_origem):
-
-        if item == 'nicefile.py':
+        #🔥 Proteção para não mover os ficheiros do próprio script/configuração e Git
+        if item in ['nicefile.py', 'config.json'] or item.startswith('.'):
             continue
-
+            
         caminho_item = os.path.join(pasta_origem, item)
         
         if os.path.isfile(caminho_item):
@@ -42,8 +47,8 @@ def organizar():
                     os.makedirs(pasta_destino)
                 shutil.move(caminho_item, pasta_destino)
             
-            print(f"Arquivo '{item}' movido para a pasta '{pasta_destino}'")
+            print(f"Ficheiro '{item}' movido para a pasta '{pasta_destino}'")
     
 if __name__ == "__main__":
     organizar()
-    print("Organização concluída!")
+    print("Organização concluída com sucesso!")

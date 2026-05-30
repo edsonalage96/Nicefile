@@ -1,0 +1,8 @@
+{
+    "Imagens": [".jpg", ".jpeg", ".png", ".gif", ".bmp", ".tiff"],
+    "Documentos": [".pdf", ".docx", ".txt", ".xlsx", ".pptx"],
+    "Audio": [".mp3", ".wav", ".aac", ".flac"],
+    "Videos": [".mp4", ".avi", ".mkv", ".mov"],
+    "Arquivos_Compactados": [".zip", ".rar", ".7z", ".tar.gz"],
+    "Codigo_Fonte": [".py", ".java", ".cpp", ".js", ".html", ".css"]
+}
